@@ -43,7 +43,45 @@ extension GetRxPersistExtension<T> on Rx<T> {
   }
 }
 
-extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {}
+extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {
+  RxMap<K, V> persist(
+    String key, {
+    StorageProvider? provider,
+    Deserializer<K>? keyDeserializer,
+    Serializer<K>? keySerializer,
+    Deserializer<V>? valueDeserializer,
+    Serializer<V>? valueSerializer,
+  }) {
+    // choose provider
+    final usingProvider = provider ?? GetRxPersist.defaultProvider;
+
+    // get persisted value
+    final persistValue = usingProvider.get<String>(key);
+
+    if (persistValue != null) {
+      final jsonMap = jsonDecode(persistValue);
+
+      value = (jsonMap as Map<String, dynamic>).map((key, value) {
+        final outKey = keyDeserializer != null ? keyDeserializer(jsonDecode(key)) : jsonDecode(key) as K;
+        final outValue = valueDeserializer != null ? valueDeserializer(jsonDecode(key)) : value as V;
+        return MapEntry(outKey, outValue);
+      });
+    }
+
+    // persist data when value changed
+    listen((map) {
+      final stringMap = map.map((key, value) {
+        final stringKey = keySerializer != null ? jsonEncode(keySerializer(key)) : jsonEncode(key);
+        final stringValue = valueSerializer != null ? jsonEncode(valueSerializer(value)) : value;
+        return MapEntry(stringKey, stringValue);
+      });
+
+      usingProvider.set<String>(key, jsonEncode(stringMap));
+    });
+
+    return this;
+  }
+}
 
 extension GetRxPersistListExtension<E> on RxList<E> {
   RxList<E> persist(
@@ -86,11 +124,11 @@ extension GetRxPersistListExtension<E> on RxList<E> {
 
 extension GetRxPersistSetExtension<E> on RxSet<E> {
   RxSet<E> persist(
-      String key, {
-        StorageProvider? provider,
-        Deserializer<E>? deserializer,
-        Serializer<E>? serializer,
-      }) {
+    String key, {
+    StorageProvider? provider,
+    Deserializer<E>? deserializer,
+    Serializer<E>? serializer,
+  }) {
     // choose provider
     final usingProvider = provider ?? GetRxPersist.defaultProvider;
 

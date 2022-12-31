@@ -8,7 +8,7 @@ class PersistedObject {
 }
 
 class PersistedObject2 {
-  int? counter;
+  int counter = 0;
 
   PersistedObject2({this.counter = 0});
 
@@ -55,6 +55,14 @@ class CounterStore {
         deserializer: PersistedObject2.fromJson,
       );
 
+  final persistedIntMap = <int, String>{}.obs.persist('counter.persistedIntMap');
+  final persistedObjectMap = <PersistedObject, PersistedObject2>{}.obs.persist(
+        'counter.persistedObjectMap',
+        keyDeserializer: (json) => PersistedObject(counter: json['counter']),
+        keySerializer: (instance) => {'counter': instance.counter},
+        valueDeserializer: PersistedObject2.fromJson,
+      );
+
   void increment() {
     notPersisted.value++;
     persistedInt.value++;
@@ -62,15 +70,11 @@ class CounterStore {
     persistedBool.toggle();
     persistedNullable.value = persistedBool.isTrue ? 0 : null;
 
-    if (persistedObject.value.counter != null) {
-      persistedObject.value.counter = persistedObject.value.counter! + 1;
-      persistedObject.refresh();
-    }
+    persistedObject.value.counter = persistedObject.value.counter + 1;
+    persistedObject.refresh();
 
-    if (persistedObject2.value.counter != null) {
-      persistedObject2.value.counter = persistedObject2.value.counter! + 1;
-      persistedObject2.refresh();
-    }
+    persistedObject2.value.counter = persistedObject2.value.counter + 1;
+    persistedObject2.refresh();
 
     persistedIntList.add(persistedInt.value);
     persistedStringList.add('${persistedInt.value}');
@@ -78,6 +82,8 @@ class CounterStore {
 
     persistedIntSet.add(persistedInt.value);
     persistedObjectSet.add(PersistedObject2(counter: persistedInt.value));
+    persistedIntMap[persistedInt.value] = persistedInt.value.toString();
+    persistedObjectMap[PersistedObject(counter: persistedInt.value)] = PersistedObject2(counter: persistedInt.value);
   }
 
   void reset() {
@@ -93,5 +99,7 @@ class CounterStore {
     persistedObjectList.clear();
     persistedIntSet.clear();
     persistedObjectSet.clear();
+    persistedIntMap.clear();
+    persistedObjectMap.clear();
   }
 }

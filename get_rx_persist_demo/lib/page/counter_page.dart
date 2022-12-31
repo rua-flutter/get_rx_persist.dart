@@ -37,7 +37,8 @@ class CounterPage extends StatelessWidget {
               Text('Persist Object List: ${counterStore.persistedObjectList.length}, sum: ${counterStore.persistedObjectList.fold(0, (prev, curr) => prev + curr.counter!)}'),
               Text('Persist Int Set: ${counterStore.persistedIntSet.length}'),
               Text('Persist Object Set: ${counterStore.persistedObjectSet.length}, sum: ${counterStore.persistedObjectSet.fold(0, (prev, curr) => prev + curr.counter!)}'),
-
+              Text('Persist Int Map: ${counterStore.persistedIntMap.length}'),
+              Text('Persist Object Map: ${counterStore.persistedObjectMap.length}'),
             ],
           ),
         ),
