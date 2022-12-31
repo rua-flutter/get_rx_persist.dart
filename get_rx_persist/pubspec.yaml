@@ -1,0 +1,21 @@
+name: get_rx_persist
+description: Get Rx Lite-weight Persist
+version: 0.1.0
+homepage: https://github.com/rua-flutter/get_rx_persist
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ">=4.0.0 <5.0.0"
+  get_storage: ^2.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
