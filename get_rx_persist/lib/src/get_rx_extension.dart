@@ -84,7 +84,7 @@ extension GetRxPersistListExtension<E> on RxList<E> {
   }
 }
 
-extension GetRxPersistSetExtension<E> on Set<E> {}
+extension GetRxPersistSetExtension<E> on RxSet<E> {}
 
 typedef Deserializer<R> = R Function(Map<String, dynamic> jsonMap);
 typedef Serializer<T> = Map<String, dynamic> Function(T instance);

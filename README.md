@@ -124,7 +124,7 @@ Modify your deserializer
 
 ```dart
 class Profile {
-  String? name;
+  Rx<String?> name;
 
   Profile({this.name});
 
