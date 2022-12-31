@@ -45,9 +45,47 @@ extension GetRxPersistExtension<T> on Rx<T> {
 
 extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {}
 
-extension GetRxPersistListExtension<E> on RxList<E> {}
+extension GetRxPersistListExtension<E> on RxList<E> {
+  RxList<E> persist(
+    String key, {
+    StorageProvider? provider,
+    ItemDeserializer<E>? deserializer,
+    Serializer<E>? serializer,
+  }) {
+    // choose provider
+    final usingProvider = provider ?? GetRxPersist.defaultProvider;
+
+    // get persisted value
+    final persistValue = usingProvider.get<String>(key);
+
+    // try to restore if persisted value is not empty
+    if (persistValue != null) {
+      final json = jsonDecode(persistValue);
+
+      if (deserializer != null) {
+        value = (json as List<dynamic>).map(deserializer).cast<E>().toList();
+      } else {
+        // assert(json is T, "expect type $T receive type ${persistValue.runtimeType}");
+        value = (json as List<dynamic>).cast<E>().toList();
+      }
+    }
+
+    // persist data when value changed
+    listen((list) {
+      if (serializer != null) {
+        usingProvider.set<String>(key, jsonEncode(list.map(serializer)));
+        return;
+      }
+
+      usingProvider.set<String>(key, jsonEncode(list));
+    });
+
+    return this;
+  }
+}
 
 extension GetRxPersistSetExtension<E> on Set<E> {}
 
 typedef Deserializer<R> = R Function(Map<String, dynamic> jsonMap);
+typedef ItemDeserializer<R> = R Function(dynamic json);
 typedef Serializer<T> = Map<String, dynamic> Function(T instance);

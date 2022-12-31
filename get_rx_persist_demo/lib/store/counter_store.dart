@@ -7,7 +7,6 @@ class PersistedObject {
   PersistedObject({this.counter = 0});
 }
 
-
 class PersistedObject2 {
   int? counter;
 
@@ -33,15 +32,18 @@ class CounterStore {
   final Rx<int?> persistedNullable = (0 as int?).obs.persist('counter.persistedNullable');
 
   final persistedObject = PersistedObject().obs.persist(
-    'counter.persistedObject',
-    deserializer: (json) => PersistedObject(counter: json['counter']),
-    serializer: (instance) => {'counter': instance.counter},
-  );
+        'counter.persistedObject',
+        deserializer: (json) => PersistedObject(counter: json['counter']),
+        serializer: (instance) => {'counter': instance.counter},
+      );
 
   final persistedObject2 = PersistedObject2().obs.persist(
-    'counter.persistedObject2',
-    deserializer: PersistedObject2.fromJson,
-  );
+        'counter.persistedObject2',
+        deserializer: PersistedObject2.fromJson,
+      );
+
+  final persistedIntList = <int>[].obs.persist('counter.persistedIntList');
+  final persistedStringList = <String>[].obs.persist('counter.persistedStringList');
 
   void increment() {
     notPersisted.value++;
@@ -52,14 +54,16 @@ class CounterStore {
 
     if (persistedObject.value.counter != null) {
       persistedObject.value.counter = persistedObject.value.counter! + 1;
+      persistedObject.refresh();
     }
 
     if (persistedObject2.value.counter != null) {
       persistedObject2.value.counter = persistedObject2.value.counter! + 1;
+      persistedObject2.refresh();
     }
 
-    persistedObject.refresh();
-    persistedObject2.refresh();
+    persistedIntList.add(1);
+    persistedStringList.add('1');
   }
 
   void reset() {
@@ -70,5 +74,7 @@ class CounterStore {
     persistedNullable.value = 0;
     persistedObject.value = PersistedObject();
     persistedObject2.value = PersistedObject2();
+    persistedIntList.clear();
+    persistedStringList.clear();
   }
 }
