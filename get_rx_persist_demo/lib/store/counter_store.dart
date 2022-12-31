@@ -44,6 +44,10 @@ class CounterStore {
 
   final persistedIntList = <int>[].obs.persist('counter.persistedIntList');
   final persistedStringList = <String>[].obs.persist('counter.persistedStringList');
+  final persistedObjectList = <PersistedObject2>[].obs.persist(
+        'counter.persistedObjectList',
+        deserializer: PersistedObject2.fromJson,
+      );
 
   void increment() {
     notPersisted.value++;
@@ -62,8 +66,9 @@ class CounterStore {
       persistedObject2.refresh();
     }
 
-    persistedIntList.add(1);
-    persistedStringList.add('1');
+    persistedIntList.add(persistedInt.value);
+    persistedStringList.add('${persistedInt.value}');
+    persistedObjectList.add(PersistedObject2(counter: persistedInt.value));
   }
 
   void reset() {
@@ -76,5 +81,6 @@ class CounterStore {
     persistedObject2.value = PersistedObject2();
     persistedIntList.clear();
     persistedStringList.clear();
+    persistedObjectList.clear();
   }
 }

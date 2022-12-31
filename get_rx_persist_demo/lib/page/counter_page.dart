@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_rx_persist_demo/store/counter_store.dart';
@@ -32,6 +34,7 @@ class CounterPage extends StatelessWidget {
               Text('Persist Int List: ${counterStore.persistedIntList.length}'),
               Text('Persist String List: ${counterStore.persistedIntList.length}'),
               Text('Persist String List: ${counterStore.persistedStringList.length}'),
+              Text('Persist Object List: ${counterStore.persistedObjectList.length}, sum: ${counterStore.persistedObjectList.fold(0, (prev, curr) => prev + curr.counter!)}'),
             ],
           ),
         ),
