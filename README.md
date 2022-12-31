@@ -15,9 +15,9 @@ A flutter project makes your Rx value auto restore and persist.
 
 ## Supported Types
 
-Supported: int, num, double, String, bool, Null
+Supported: int, num, double, String, bool, Null, Object
 
-Future Supported: Object, Map, List, Set
+Future Supported: Map, List, Set
 
 
 

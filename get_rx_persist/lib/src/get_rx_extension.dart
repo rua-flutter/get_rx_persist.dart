@@ -4,16 +4,20 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:get_rx_persist/get_rx_persist.dart';
 import 'package:get_rx_persist/src/storage_provider.dart';
 
-// extension GetRxExtension<T> on T {
-//
-// }
-
 extension GetRxPersistExtension<T> on Rx<T> {
-  Rx<T> persist(String key, {StorageProvider? provider, Deserializer<T>? deserializer}) {
+  Rx<T> persist(
+    String key, {
+    StorageProvider? provider,
+    Deserializer<T>? deserializer,
+    Serializer<T>? serializer,
+  }) {
+    // choose provider
     final usingProvider = provider ?? GetRxPersist.defaultProvider;
 
+    // get persisted value
     final persistValue = usingProvider.get<String>(key);
 
+    // try to restore if persisted value is not empty
     if (persistValue != null) {
       final json = jsonDecode(persistValue);
 
@@ -25,22 +29,25 @@ extension GetRxPersistExtension<T> on Rx<T> {
       }
     }
 
+    // persist data when value changed
     listen((value) {
-      usingProvider.set<String>(key, json.encode(value));
+      if (serializer != null) {
+        usingProvider.set<String>(key, jsonEncode(serializer(value)));
+        return;
+      }
+
+      usingProvider.set<String>(key, jsonEncode(value));
     });
 
     return this;
   }
 }
 
-extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {
+extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {}
 
-}
+extension GetRxPersistListExtension<E> on RxList<E> {}
 
-extension GetRxPersistIntExtension<T> on int {
-  int persist(String key, {StorageProvider? provider}) {
-    return this;
-  }
-}
+extension GetRxPersistSetExtension<E> on Set<E> {}
 
 typedef Deserializer<R> = R Function(Map<String, dynamic> jsonMap);
+typedef Serializer<T> = Map<String, dynamic> Function(T instance);

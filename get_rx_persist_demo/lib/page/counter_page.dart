@@ -11,7 +11,10 @@ class CounterPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Counter Page'),
+        title: GestureDetector(
+          onTap: counterStore.reset,
+          child: const Text('Counter Page'),
+        ),
       ),
       body: Center(
         child: Obx(
@@ -24,6 +27,8 @@ class CounterPage extends StatelessWidget {
               Text('Persist Double: ${counterStore.persistedDouble.value}'),
               Text('Persist Bool: ${counterStore.persistedBool.value}'),
               Text('Persist Null: ${counterStore.persistedNullable.value}'),
+              Text('Persist Object: ${counterStore.persistedObject.value.counter}'),
+              Text('Persist Object2: ${counterStore.persistedObject2.value.counter}'),
             ],
           ),
         ),
