@@ -8,24 +8,16 @@ A flutter project makes your Rx value auto restore and persist.
 
 - [x]  Easy to use
 - [x]  Using in multiple real world projects
-- [x]  Support All Platform
-- [x]  Support Various Storage
-- [x]  Support Customize Storage
+- [x]  Support all platform
+- [x]  Support various and customized storage
 
 
 
 ## Supported Types
 
-- [x] int
-- [x] num
-- [x] double
-- [x] String
-- [x] bool
-- [x] Null
-- [ ] Object
-- [ ] Map
-- [ ] List
-- [ ] Set
+Supported: int, num, double, String, bool, Null
+
+Future Supported: Object, Map, List, Set
 
 
 
@@ -148,6 +140,16 @@ class Profile {
   }
 }
 ```
+
+
+
+## Storage
+
+### Provided Storage
+
+- DefaultStorageProvider/GetStorageProvider: use GetStorage as storage
+- MemoryStorageProvider:  use memory as storage
+- MockStorageProvider:  used for test,  provide some test helper methods, check source code for more info
 
 
 
