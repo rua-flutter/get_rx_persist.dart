@@ -1,17 +1,28 @@
 # get_rx_persist
 
 A flutter project makes your Rx value auto restore and persist.
-[check out exmaple](https://github.com/rua-flutter/get_rx_persist.dart/blob/main/get_rx_persist/example/example.md)
+
+
+
+[![pub package](https://img.shields.io/pub/v/get_rx_persist?style=flat)](https://pub.dev/packages/get_rx_persist) ![license](https://img.shields.io/github/license/rua-flutter/get_rx_persist.dart?style=flat)  [![stars](https://img.shields.io/github/stars/rua-flutter/get_rx_persist.dart?style=social)](https://github.com/rua-flutter/get_rx_persist.dart/tree/main/get_rx_persist)
+
+## Examples
+
+[check out](https://github.com/rua-flutter/get_rx_persist.dart/blob/main/get_rx_persist/example/example.md)
 
 
 
 ## Features
 
-- [x]  Easy to use
-- [x]  Support all platform
-- [x]  Support various and customized storage
-- [x]  Using in multiple real world projects
-- [x]  100% test coverage
+- Easy to use
+
+- Support all platform
+
+- Support various and customized storage
+
+- Using in multiple real world projects
+
+- 100% test coverage
 
 
 
