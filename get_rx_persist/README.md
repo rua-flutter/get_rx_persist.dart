@@ -8,9 +8,10 @@ A flutter project makes your Rx value auto restore and persist.
 ## Features
 
 - [x]  Easy to use
-- [x]  Using in multiple real world projects
 - [x]  Support all platform
 - [x]  Support various and customized storage
+- [x]  Using in multiple real world projects
+- [x]  100% test coverage
 
 
 
@@ -29,6 +30,8 @@ This project is maintaining.
 ## Install
 
 `flutter pub add get_rx_persist`
+
+
 
 
 ## Storage

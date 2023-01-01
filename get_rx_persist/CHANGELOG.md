@@ -1,3 +1,8 @@
+## 0.3.0
+
+* 100% test coverage
+* refactor storage provider implementations
+
 ## 0.2.0
 
 * Add some basic tests
