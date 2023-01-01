@@ -1,3 +1,8 @@
+## 1.0.0
+
+* fix some bugs
+* code double check on demo
+
 ## 0.3.0
 
 * 100% test coverage
