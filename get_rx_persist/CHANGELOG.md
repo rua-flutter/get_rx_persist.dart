@@ -1,7 +1,7 @@
 ## 0.2.0
 
-* Add tests
-* Add comments
+* Add some basic tests
+* Add some important comments
 * Add examples
 * Update Doc
 * Support primitive value, collections and object

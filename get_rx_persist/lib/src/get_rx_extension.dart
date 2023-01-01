@@ -4,6 +4,9 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:get_rx_persist/get_rx_persist.dart';
 import 'package:get_rx_persist/src/storage_provider.dart';
 
+/// GetRxPersistExtension
+///
+/// persist support for both primitive value and object value
 extension GetRxPersistExtension<T> on Rx<T> {
   Rx<T> persist(
     String key, {
