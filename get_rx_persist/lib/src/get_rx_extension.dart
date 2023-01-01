@@ -99,28 +99,25 @@ extension GetRxPersistListExtension<E> on RxList<E> {
     final usingProvider = provider ?? GetRxPersist.defaultProvider;
 
     // get persisted value
-    final persistValue = usingProvider.get<String>(key);
+    final persistValue = usingProvider.get(key);
 
     // try to restore if persisted value is not empty
     if (persistValue != null) {
-      final json = jsonDecode(persistValue);
-
       if (deserializer != null) {
-        value = (json as List<dynamic>).cast<Map<String, dynamic>>().map(deserializer).cast<E>().toList();
+        value = (persistValue as List<dynamic>).cast<Map<String, dynamic>>().map(deserializer).cast<E>().toList();
       } else {
-        // assert(json is T, "expect type $T receive type ${persistValue.runtimeType}");
-        value = (json as List<dynamic>).cast<E>().toList();
+        value = (persistValue as List<dynamic>).cast<E>().toList();
       }
     }
 
     // persist data when value changed
     listen((list) {
       if (serializer != null) {
-        usingProvider.set<String>(key, jsonEncode(list.map(serializer)));
+        usingProvider.set(key, list.map(serializer).toList());
         return;
       }
 
-      usingProvider.set<String>(key, jsonEncode(list));
+      usingProvider.set(key, list);
     });
 
     return this;
