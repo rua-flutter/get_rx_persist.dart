@@ -41,7 +41,7 @@ This project is maintaining.
 
 
 
-### Customize Storage
+### Customized Storage
 
 Create a customized class that extends [**StorageProvider**](https://github.com/rua-flutter/get_rx_persist.dart/blob/main/get_rx_persist/lib/src/storage_provider.dart)
 

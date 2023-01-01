@@ -1,6 +1,8 @@
 name: get_rx_persist
-description: Get Rx Lite-weight Persist
-version: 0.1.0
+description: Get Rx Lite-weight Persist, 
+  which enable auto persist and restore functionality to get_rx package used by get package
+  you can use provided file storage which based on get_storage, or customize your own
+version: 0.2.0
 homepage: https://github.com/rua-flutter/get_rx_persist
 
 environment:
