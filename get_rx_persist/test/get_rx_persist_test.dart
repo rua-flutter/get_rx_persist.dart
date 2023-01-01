@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_rx_persist/get_rx_persist.dart';
 
@@ -9,6 +10,7 @@ void main() {
     final provider = MockStorageProvider('MOCK');
 
     test('default provider', () async {
+      WidgetsFlutterBinding.ensureInitialized();
       // walk-around since this package do not provide native plugin modules
       try {
         await GetRxPersist.init();
