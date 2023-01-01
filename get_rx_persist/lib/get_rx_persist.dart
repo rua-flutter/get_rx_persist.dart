@@ -10,9 +10,9 @@ export 'package:get_rx_persist/src/provider/mock_storage_provider.dart';
 /// GetRxPersist
 ///
 /// Get Rx Persist Configuration Class
-/// in most case, you should call 'await GetRxPersist.initialize();' before app start
+/// in most case, you should call 'await GetRxPersist.init();' before app start
 abstract class GetRxPersist {
-  static StorageProvider defaultProvider = throw UnimplementedError();
+  static StorageProvider defaultProvider = throw Exception('you FORGET to call [await GetRxPersist.init()] before runApp()');
 
   /// initialize the GetRxPersist.
   /// it will load will ALL persisted data to memory with the default [provider].
