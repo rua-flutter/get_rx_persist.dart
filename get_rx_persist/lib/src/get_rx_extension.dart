@@ -61,14 +61,12 @@ extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {
     final usingProvider = provider ?? GetRxPersist.defaultProvider;
 
     // get persisted value
-    final persistValue = usingProvider.get<String>(key);
+    final persistValue = usingProvider.get(key);
 
     if (persistValue != null) {
-      final jsonMap = jsonDecode(persistValue);
-
-      value = (jsonMap as Map<String, dynamic>).map((key, value) {
+      value = (persistValue as Map<String, dynamic>).map((key, value) {
         final outKey = keyDeserializer != null ? keyDeserializer(jsonDecode(key)) : jsonDecode(key) as K;
-        final outValue = valueDeserializer != null ? valueDeserializer(jsonDecode(key)) : value as V;
+        final outValue = valueDeserializer != null ? valueDeserializer(value) : value as V;
         return MapEntry(outKey, outValue);
       });
     }
@@ -76,12 +74,12 @@ extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {
     // persist data when value changed
     listen((map) {
       final stringMap = map.map((key, value) {
-        final stringKey = keySerializer != null ? jsonEncode(keySerializer(key)) : jsonEncode(key);
-        final stringValue = valueSerializer != null ? jsonEncode(valueSerializer(value)) : value;
+        final stringKey = keySerializer != null ? keySerializer(key) : jsonEncode(key);
+        final stringValue = valueSerializer != null ? valueSerializer(value) : value;
         return MapEntry(stringKey, stringValue);
       });
 
-      usingProvider.set<String>(key, jsonEncode(stringMap));
+      usingProvider.set(key, stringMap);
     });
 
     return this;

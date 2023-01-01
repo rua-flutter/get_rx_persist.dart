@@ -1,27 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_rx_persist/get_rx_persist.dart';
 
-class TestSerializableObject {
-  int? intVal;
-  String? stringVal;
-  bool? boolVal;
-
-  TestSerializableObject({this.intVal, this.stringVal, this.boolVal});
-
-  TestSerializableObject.fromJson(Map<String, dynamic> json) {
-    intVal = json['intVal'];
-    stringVal = json['stringVal'];
-    boolVal = json['boolVal'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['intVal'] = this.intVal;
-    data['stringVal'] = this.stringVal;
-    data['boolVal'] = this.boolVal;
-    return data;
-  }
-}
+import 'data/test_serializable_object.dart';
 
 void main() {
   group('object tests', () {
