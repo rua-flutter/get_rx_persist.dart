@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:get_rx_persist/src/storage_provider.dart';
 
@@ -32,12 +33,11 @@ class MemoryStorageProvider extends StorageProvider {
       return null;
     }
 
-    return dict[key] as T?;
+    return jsonDecode(dict[key]!) as T?;
   }
 
   @override
   void set<T>(String key, T value) {
-    assert(value is String, value);
-    dict[key] = value as String;
+    dict[key] = jsonEncode(value);
   }
 }

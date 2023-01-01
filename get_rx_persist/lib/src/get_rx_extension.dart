@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/get_rx/get_rx.dart';
 import 'package:get_rx_persist/get_rx_persist.dart';
 import 'package:get_rx_persist/src/storage_provider.dart';
 
@@ -18,28 +17,31 @@ extension GetRxPersistExtension<T> on Rx<T> {
     final usingProvider = provider ?? GetRxPersist.defaultProvider;
 
     // get persisted value
-    final persistValue = usingProvider.get<String>(key);
+    final persistValue = usingProvider.get(key);
 
     // try to restore if persisted value is not empty
     if (persistValue != null) {
-      final json = jsonDecode(persistValue);
-
       if (deserializer != null) {
-        value = deserializer(json);
+        value = deserializer(persistValue);
       } else {
-        assert(json is T, "expect type $T receive type ${persistValue.runtimeType}");
-        value = json as T;
+        assert(persistValue is T, "expect type $T receive type ${persistValue.runtimeType}");
+        value = persistValue as T;
       }
     }
 
     // persist data when value changed
     listen((value) {
-      if (serializer != null) {
-        usingProvider.set<String>(key, jsonEncode(serializer(value)));
+      if (value == null) {
+        usingProvider.del(key);
         return;
       }
 
-      usingProvider.set<String>(key, jsonEncode(value));
+      if (serializer != null) {
+        usingProvider.set(key, serializer(value));
+        return;
+      }
+
+      usingProvider.set(key, value);
     });
 
     return this;

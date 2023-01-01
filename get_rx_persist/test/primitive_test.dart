@@ -15,12 +15,12 @@ void main() {
 
     test('data restored', () {
       provider.reset();
-      provider.set('intVal', jsonEncode(2));
-      provider.set('doubleVal', jsonEncode(3.0));
-      provider.set('numVal1', jsonEncode(4));
-      provider.set('numVal2', jsonEncode(5.0));
-      provider.set('stringVal', jsonEncode('str'));
-      provider.set('boolVal', jsonEncode(true));
+      provider.set('intVal', 2);
+      provider.set('doubleVal', 3.0);
+      provider.set('numVal1', 4);
+      provider.set('numVal2', 5.0);
+      provider.set('stringVal', 'str');
+      provider.set('boolVal', true);
 
       final intVal = 0.obs.persist('intVal');
       final doubleVal = 0.0.obs.persist('doubleVal');

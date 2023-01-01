@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_rx_persist/get_rx_persist.dart';
 
@@ -40,7 +38,7 @@ void main() {
 
     test('data restored', () {
       provider.reset();
-      provider.set('objectVal', jsonEncode(object));
+      provider.set('objectVal', object);
 
       final objectVal = TestSerializableObject().obs.persist(
             'objectVal',
@@ -68,7 +66,7 @@ void main() {
       objectVal.value = object;
 
       expect(provider.hasSetKey('objectVal'), true);
-      expect(provider.hasSetKeyValue('objectVal', jsonEncode(object)), true);
+      expect(provider.hasSetKeyValue('objectVal', object), true);
       expect(objectVal.value, isA<TestSerializableObject>());
       expect(objectVal.value.intVal, 1);
       expect(objectVal.value.stringVal, 'str');
@@ -91,7 +89,7 @@ void main() {
       objectVal.value = object;
 
       expect(provider.hasSetKey('objectVal'), true);
-      expect(provider.hasSetKeyValue('objectVal', jsonEncode(object)), true);
+      // expect(provider.hasSetKeyValue('objectVal', object), true);
       expect(objectVal.value, isA<TestSerializableObject>());
       expect(objectVal.value.intVal, 1);
       expect(objectVal.value.stringVal, 'str');

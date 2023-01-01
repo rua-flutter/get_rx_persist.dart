@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get_rx_persist/src/provider/memory_storage_provider.dart';
 
 /// MockStorageProvider
@@ -5,9 +7,9 @@ import 'package:get_rx_persist/src/provider/memory_storage_provider.dart';
 /// this class is used for testing in package and developer's code
 /// all data will stored in memory only, check out [MemoryStorageProvider]
 class MockStorageProvider extends MemoryStorageProvider {
-  final getList = <String>[];
-  final delList = <String>[];
-  final setList = <MapEntry<String, dynamic>>[];
+  final getList = <dynamic>[];
+  final delList = <dynamic>[];
+  final setList = <MapEntry<dynamic, dynamic>>[];
 
   int get setCalledCount => setList.length;
   int get getCalledCount => getList.length;
@@ -31,7 +33,6 @@ class MockStorageProvider extends MemoryStorageProvider {
   @override
   void set<T>(String key, T value) {
     setList.add(MapEntry(key, value));
-
     super.set(key, value);
   }
 
@@ -53,7 +54,7 @@ class MockStorageProvider extends MemoryStorageProvider {
     return setList.where((el) => el.key == key).isNotEmpty;
   }
 
-  bool hasSetKeyValue(String key, String value) {
+  bool hasSetKeyValue(String key, dynamic value) {
     return setList.where((el) => el.key == key && el.value == value).isNotEmpty;
   }
 }
