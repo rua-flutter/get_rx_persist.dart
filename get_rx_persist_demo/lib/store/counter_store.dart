@@ -29,7 +29,7 @@ class CounterStore {
   final persistedString = '-'.obs.persist('counter.persistedString');
   final persistedBool = false.obs.persist('counter.persistedBool');
   final persistedDouble = 0.obs.persist('counter.persistedDouble');
-  final Rx<int?> persistedNullable = (0 as int?).obs.persist('counter.persistedNullable');
+  final Rx<int?> persistedNullable = (null as int?).obs.persist('counter.persistedNullable');
 
   final persistedObject = PersistedObject().obs.persist(
         'counter.persistedObject',

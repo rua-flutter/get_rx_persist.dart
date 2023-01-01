@@ -94,7 +94,7 @@ packages:
       path: "../get_rx_persist"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.3.0"
   get_storage:
     dependency: transitive
     description:
