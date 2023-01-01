@@ -1,7 +1,7 @@
 name: get_rx_persist_demo
 description: Get Rx Persist Demo
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to
 
 version: 1.0.0+1
 
