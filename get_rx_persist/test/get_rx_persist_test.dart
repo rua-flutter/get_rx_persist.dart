@@ -16,5 +16,15 @@ void main() {
         expect(e, isA<MissingPluginException>());
       }
     });
+
+    test('clear()', () {
+      provider.set('key', 'value');
+      expect(provider.get('key'), 'value');
+
+      provider.clear();
+
+      expect(provider.clearCalledCount, 1);
+      expect(provider.get('key'), null);
+    });
   });
 }
