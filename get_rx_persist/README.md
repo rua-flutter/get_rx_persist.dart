@@ -1,7 +1,7 @@
 # get_rx_persist
 
 A flutter project makes your Rx value auto restore and persist.
-[exmaple](https://github.com/rua-flutter/get_rx_persist.dart/tree/main/get_rx_persist/exmaple/example.md)
+[check out exmaple](https://github.com/rua-flutter/get_rx_persist.dart/tree/main/get_rx_persist/exmaple/example.md)
 
 
 
