@@ -73,11 +73,6 @@ extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {
 
     // persist data when value changed
     listen((map) {
-      if (map == null) {
-        usingProvider.del(key);
-        return;
-      }
-
       final stringMap = map.map((key, value) {
         final stringKey = keySerializer != null ? jsonEncode(keySerializer(key)) : jsonEncode(key);
         final stringValue = valueSerializer != null ? valueSerializer(value) : value;
@@ -115,11 +110,6 @@ extension GetRxPersistListExtension<E> on RxList<E> {
 
     // persist data when value changed
     listen((list) {
-      if (list == null) {
-        usingProvider.del(key);
-        return;
-      }
-
       if (serializer != null) {
         usingProvider.set(key, list.map(serializer).toList());
         return;
@@ -157,11 +147,6 @@ extension GetRxPersistSetExtension<E> on RxSet<E> {
 
     // persist data when value changed
     listen((list) {
-      if (list == null) {
-        usingProvider.del(key);
-        return;
-      }
-
       if (serializer != null) {
         usingProvider.set(key, list.map(serializer).toList());
         return;

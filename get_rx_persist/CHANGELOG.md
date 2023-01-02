@@ -1,12 +1,17 @@
+## 1.0.0+1
+
+* Add guide for people who forget to call .init()
+* Clean up code
+
 ## 1.0.0
 
-* fix some bugs
-* code double check on demo
+* Fix some bugs
+* Code double check on demo
 
 ## 0.3.0
 
 * 100% test coverage
-* refactor storage provider implementations
+* Refactor storage provider implementations
 
 ## 0.2.0
 
