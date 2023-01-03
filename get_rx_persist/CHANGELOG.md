@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Support get_module
+
 ## 1.0.0+1
 
 * Add guide for people who forget to call .init()
