@@ -13,7 +13,7 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       // walk-around since this package do not provide native plugin modules
       try {
-        await GetRxModule().install();
+        await GetRxPersistModule().install();
       } catch (e) {
         expect(e, isA<MissingPluginException>());
       }

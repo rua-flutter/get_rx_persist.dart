@@ -1,3 +1,7 @@
+## 1.1.0+1
+
+* Fix module name
+
 ## 1.1.0
 
 * Support get_module

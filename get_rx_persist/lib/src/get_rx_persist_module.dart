@@ -6,7 +6,7 @@ import 'package:get_rx_persist/get_rx_persist.dart';
 /// GetRxModule
 ///
 /// add [Module] support for get_module
-class GetRxModule extends Module {
+class GetRxPersistModule extends Module {
   @override
   Future<void> install() async {
     await GetRxPersist.init();
