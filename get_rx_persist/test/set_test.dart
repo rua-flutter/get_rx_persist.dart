@@ -52,8 +52,8 @@ void main() {
           );
 
       final intVal = <int>{}.obs.persist(
-        'intSetVal',
-      );
+            'intSetVal',
+          );
 
       objectVal.add(object);
       intVal.add(1);

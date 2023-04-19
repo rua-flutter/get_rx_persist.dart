@@ -31,13 +31,14 @@ void main() {
       expect(objectVal.value.boolVal, true);
     });
 
-    test('data persisted without serializer', () {
+    test('data persisted without serializer', () async {
       provider.reset();
       final objectVal = TestSerializableObject().obs.persist(
-        'objectVal',
-        deserializer: TestSerializableObject.fromJson,
-      );
+            'objectVal',
+            deserializer: TestSerializableObject.fromJson,
+          );
 
+      await Future.delayed(Duration(milliseconds: 2000));
       expect(objectVal.value, isA<TestSerializableObject>());
       expect(objectVal.value.intVal, null);
       expect(objectVal.value.stringVal, null);
@@ -53,13 +54,13 @@ void main() {
       expect(objectVal.value.boolVal, true);
     });
 
-    test('data persisted with serializer', () {
+    test('data persisted with serializer', () async {
       provider.reset();
       final objectVal = TestSerializableObject().obs.persist(
-        'objectVal',
-        deserializer: TestSerializableObject.fromJson,
-        serializer: (instance) => instance.toJson(),
-      );
+            'objectVal',
+            deserializer: TestSerializableObject.fromJson,
+            serializer: (instance) => instance.toJson(),
+          );
 
       expect(objectVal.value, isA<TestSerializableObject>());
       expect(objectVal.value.intVal, null);
@@ -67,7 +68,7 @@ void main() {
       expect(objectVal.value.boolVal, null);
 
       objectVal.value = object;
-
+      await Future.delayed(Duration(milliseconds: 20));
       expect(provider.hasSetKey('objectVal'), true);
       // expect(provider.hasSetKeyValue('objectVal', object), true);
       expect(objectVal.value, isA<TestSerializableObject>());

@@ -33,12 +33,13 @@ void main() {
         jsonEncode(1): 1,
       });
 
-      final objectVal = <TestSerializableObject, TestSerializableObject2>{}.obs.persist(
-            'objectListVal',
-            keyDeserializer: TestSerializableObject.fromJson,
-            valueDeserializer: TestSerializableObject2.fromJson,
-            valueSerializer: (instance) => instance.toJson(),
-          );
+      final objectVal =
+          <TestSerializableObject, TestSerializableObject2>{}.obs.persist(
+                'objectListVal',
+                keyDeserializer: TestSerializableObject.fromJson,
+                valueDeserializer: TestSerializableObject2.fromJson,
+                valueSerializer: (instance) => instance.toJson(),
+              );
 
       final intVal = <int, int>{}.obs.persist(
             'intListVal',
@@ -61,32 +62,36 @@ void main() {
       expect(intVal.values.first, 1);
     });
 
-    test('data persisted', () {
+    test('data persisted', () async {
       provider.reset();
-      final objectVal = <TestSerializableObject, TestSerializableObject2>{}.obs.persist(
-        'objectListVal',
-        keyDeserializer: TestSerializableObject.fromJson,
-        valueDeserializer: TestSerializableObject2.fromJson,
-        valueSerializer: (instance) => instance.toJson(),
-      );
+      final objectVal =
+          <TestSerializableObject, TestSerializableObject2>{}.obs.persist(
+                'objectListVal',
+                keyDeserializer: TestSerializableObject.fromJson,
+                valueDeserializer: TestSerializableObject2.fromJson,
+                valueSerializer: (instance) => instance.toJson(),
+              );
 
       final intVal = <int, int>{}.obs.persist(
-        'intListVal',
-      );
+            'intListVal',
+          );
 
       objectVal[object] = object2;
       intVal[1] = 1;
 
-      final objectVal2 = <TestSerializableObject, TestSerializableObject2>{}.obs.persist(
-        'objectListVal',
-        keyDeserializer: TestSerializableObject.fromJson,
-        valueDeserializer: TestSerializableObject2.fromJson,
-        valueSerializer: (instance) => instance.toJson(),
-      );
+      final objectVal2 =
+          <TestSerializableObject, TestSerializableObject2>{}.obs.persist(
+                'objectListVal',
+                keyDeserializer: TestSerializableObject.fromJson,
+                valueDeserializer: TestSerializableObject2.fromJson,
+                valueSerializer: (instance) => instance.toJson(),
+              );
 
       final intVal2 = <int, int>{}.obs.persist(
-        'intListVal',
-      );
+            'intListVal',
+          );
+
+      await Future.delayed(Duration(milliseconds: 2000));
 
       expect(objectVal2.length, 1);
       expect(objectVal2.keys.first, isA<TestSerializableObject>());

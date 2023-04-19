@@ -24,13 +24,14 @@ extension GetRxPersistExtension<T> on Rx<T> {
       if (deserializer != null) {
         value = deserializer(persistValue);
       } else {
-        assert(persistValue is T, "expect type $T receive type ${persistValue.runtimeType}");
+        assert(persistValue is T,
+            "expect type $T receive type ${persistValue.runtimeType}");
         value = persistValue as T;
       }
     }
 
     // persist data when value changed
-    listen((value) {
+    listen((value) async {
       if (value == null) {
         usingProvider.del(key);
         return;
@@ -65,8 +66,11 @@ extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {
 
     if (persistValue != null) {
       value = (persistValue as Map<String, dynamic>).map((key, value) {
-        final outKey = keyDeserializer != null ? keyDeserializer(jsonDecode(key)) : jsonDecode(key) as K;
-        final outValue = valueDeserializer != null ? valueDeserializer(value) : value as V;
+        final outKey = keyDeserializer != null
+            ? keyDeserializer(jsonDecode(key))
+            : jsonDecode(key) as K;
+        final outValue =
+            valueDeserializer != null ? valueDeserializer(value) : value as V;
         return MapEntry(outKey, outValue);
       });
     }
@@ -74,8 +78,11 @@ extension GetRxPersistMapExtension<K, V> on RxMap<K, V> {
     // persist data when value changed
     listen((map) {
       final stringMap = map.map((key, value) {
-        final stringKey = keySerializer != null ? jsonEncode(keySerializer(key)) : jsonEncode(key);
-        final stringValue = valueSerializer != null ? valueSerializer(value) : value;
+        final stringKey = keySerializer != null
+            ? jsonEncode(keySerializer(key))
+            : jsonEncode(key);
+        final stringValue =
+            valueSerializer != null ? valueSerializer(value) : value;
         return MapEntry(stringKey, stringValue);
       });
 
@@ -102,7 +109,11 @@ extension GetRxPersistListExtension<E> on RxList<E> {
     // try to restore if persisted value is not empty
     if (persistValue != null) {
       if (deserializer != null) {
-        value = (persistValue as List<dynamic>).cast<Map<String, dynamic>>().map(deserializer).cast<E>().toList();
+        value = (persistValue as List<dynamic>)
+            .cast<Map<String, dynamic>>()
+            .map(deserializer)
+            .cast<E>()
+            .toList();
       } else {
         value = (persistValue as List<dynamic>).cast<E>().toList();
       }
@@ -138,7 +149,11 @@ extension GetRxPersistSetExtension<E> on RxSet<E> {
     // try to restore if persisted value is not empty
     if (persistValue != null) {
       if (deserializer != null) {
-        assignAll((persistValue as List<dynamic>).cast<Map<String, dynamic>>().map(deserializer).cast<E>().toSet());
+        assignAll((persistValue as List<dynamic>)
+            .cast<Map<String, dynamic>>()
+            .map(deserializer)
+            .cast<E>()
+            .toSet());
       } else {
         // assert(json is T, "expect type $T receive type ${persistValue.runtimeType}");
         assignAll((persistValue as List<dynamic>).cast<E>().toSet());

@@ -5,7 +5,6 @@ import 'package:get_rx_persist/src/storage_provider.dart';
 
 export 'package:get/get_rx/get_rx.dart';
 export 'package:get_rx_persist/src/get_rx_extension.dart';
-export 'package:get_rx_persist/src/get_rx_persist_module.dart';
 export 'package:get_rx_persist/src/provider/mock_storage_provider.dart';
 
 /// GetRxPersist
@@ -13,15 +12,14 @@ export 'package:get_rx_persist/src/provider/mock_storage_provider.dart';
 /// Get Rx Persist Configuration Class
 /// in most case, you should call 'await GetRxPersist.init();' before app start
 abstract class GetRxPersist {
-  static StorageProvider defaultProvider = throw Exception('you FORGET to call [await GetRxPersist.init()] before runApp()');
+  static StorageProvider defaultProvider = throw Exception(
+      'you FORGET to call [await GetRxPersist.init()] before runApp()');
 
   /// initialize the GetRxPersist.
   /// it will load will ALL persisted data to memory with the default [provider].
   /// note: you can change provider for specific value by using '.persist(provider: YOUR_PROVIDER)'.
-  static Future<void> init({
-    StorageProvider? provider,
-    String name = 'GetRxPersist'
-  }) async {
+  static Future<void> init(
+      {StorageProvider? provider, String name = 'GetRxPersist'}) async {
     defaultProvider = provider ?? GetStorageProvider(name);
     await defaultProvider.init();
   }
