@@ -5,6 +5,7 @@ import 'package:get_rx_persist/src/storage_provider.dart';
 
 export 'package:get/get_rx/get_rx.dart';
 export 'package:get_rx_persist/src/get_rx_extension.dart';
+export 'package:get_rx_persist/src/storage_provider.dart';
 export 'package:get_rx_persist/src/provider/mock_storage_provider.dart';
 
 /// GetRxPersist
