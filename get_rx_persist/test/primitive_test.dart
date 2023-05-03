@@ -6,9 +6,7 @@ void main() {
     final provider = MockStorageProvider('MOCK');
 
     setUp(() async {
-      await GetRxPersist.init(
-          provider: provider
-      );
+      await GetRxPersist.init(provider: provider);
     });
 
     test('data restored', () {
@@ -36,7 +34,7 @@ void main() {
       expect(boolVal.value, true);
     });
 
-    test('data persisted', () {
+    test('data persisted', () async {
       provider.reset();
       final intVal = 0.obs.persist('intVal');
       final doubleVal = 0.0.obs.persist('doubleVal');
@@ -51,7 +49,7 @@ void main() {
       numVal2.value = 2.0;
       stringVal.value = 'str';
       boolVal.value = true;
-
+      await Future.delayed(Duration(milliseconds: 20));
       expect(provider.getCalledCount, 6);
       expect(provider.setCalledCount, 6);
     });

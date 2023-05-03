@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +11,7 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       // walk-around since this package do not provide native plugin modules
       try {
-        await GetRxPersistModule().install();
+        await GetRxPersist.init();
       } catch (e) {
         expect(e, isA<MissingPluginException>());
       }

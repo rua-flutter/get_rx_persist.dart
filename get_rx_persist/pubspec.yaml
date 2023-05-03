@@ -10,9 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get: ">=4.0.0 <5.0.0"
+  get: ">=5.0.0-release-candidate-4 <6.0.0"
   get_storage: ">=2.0.0 <3.0.0"
-  get_module: ">=1.0.0 <2.0.0"
+
 
 dev_dependencies:
   flutter_test:
